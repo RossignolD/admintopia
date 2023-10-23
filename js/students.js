@@ -1,7 +1,8 @@
 class Student{
-    constructor(kind, isUnlocked, previousType, nextType, undergradCost, mastersCost, phDCost){
+    constructor(kind, isUnlocked, numberOf, previousType, nextType, undergradCost, mastersCost, phDCost){
         this.kind=kind
         this.isUnlocked=isUnlocked
+        this.numberOf=numberOf
         this.previousType=previousType
         this.nextType=nextType
         this.undergradCost=undergradCost
@@ -10,11 +11,21 @@ class Student{
     }
 
     unlockNextStudent(undergrads, masters, PhDs){
-        if (undergrads>=this.undergradCost(this.nextTitle()) && masters>=this.mastersCost(this.nextTitle) && PhDs>=this.phDCost(this.nextTitle)){
+        if (undergrads>=this.undergradCost.nextType && masters>=this.mastersCost.nextType && PhDs>=this.phDCost.nextType){
             this.nextTitle.isUnlocked=true;
+            return true
         }
         else{
             this.nextTitle.isUnlocked=false;
+            return false
         }
     }
+
+    howManyStudents(){
+        return this.numberOf()
+    }
 }
+
+var Undergrad = new Student("Undergrad", true, 0, null, Masters, 0, 0, 0)
+var Masters = new Student("Masters", false, 0, Undergrad, PhDStudent, 250, 0, 0)
+var PhDStudent = new Student("PhD", false, 0, Masters, null, 0, 250, 0,)

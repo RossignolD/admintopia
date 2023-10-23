@@ -21,6 +21,8 @@
   text-align: left;
   cursor: pointer;
   transition: 0.3s;
+  font-family: inherit;
+  font-size: 1rem;
 }
 
 /* Change background color of buttons on hover */

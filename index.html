@@ -8,13 +8,17 @@
     crossorigin="anonymous"
   ></script>
   <script src="js/admins.js"></script>
+  <script src="js/students.js"></script>
   <script src="js/incrementer.js"></script>
   <script src="js/tabManager.js"></script>
+
 </head>
 
 <body>
+
+ 
   <div class="tab">
-    <button class="tablinks" onclick="openTab(event, 'home')">Home</button>
+    <button class="tablinks" id="homeButton" onclick="openTab(event, 'home')"> Home</button>
     <button class="tablinks" onclick="openTab(event, 'admitStudents')">
       Need to admit students? Click here!
     </button>
@@ -27,18 +31,18 @@
   </div>
 
   <div id="home" class="tabcontent">
-    <h3>Welcome to Admintopia</h3>
-    <div>Where today's students are tomorrow's administrators!</div>
+    <h1>Welcome to Admintopia</h1>
+    <h2>Where today's students are tomorrow's administrators!</h2>
     <div>Click on the tabs on the left to navigate Admintopia.</div>
   </div>
 
   <div id="admitStudents" class="tabcontent">
-    <h3>Paris</h3>
+    <h1>Undergraduate and Graduate Admissions</h1>
     <p>Paris is the capital of France.</p>
   </div>
 
   <div id="hireAdmins" class="tabcontent">
-    <h3>Tokyo</h3>
+    <h1>Adminstrator Hiring</h1>
     <button
       id="registrar"
       onclick="addOneMoreAdmin(Registrar); showNumber('numberOfRegistrars', Registrar)"
@@ -51,7 +55,12 @@
   </div>
 
   <div id="achievements" class="tabcontent">
-    <h3>Tokyo</h3>
+    <h1>Achievements</h1>
     <p>Tokyo is the capital of Japan.</p>
   </div>
+
+  <script>
+    document.getElementById("homeButton").click();
+    </script>
+       
 </body>
