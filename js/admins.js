@@ -1,4 +1,4 @@
-export default class Admin{
+class Admin{
 
     constructor(title, isUnlocked, numberOf, previousTitle, nextTitle, undergradCost, mastersCost, phDCost){
         this.title=title
@@ -22,6 +22,8 @@ export default class Admin{
     }
 
     howManyAdmins(){
-        return this.numberOf
+        return this.numberOf()
     }
 }
+
+var Registrar = new Admin("Registrar", true, 0, null, "committeeMember", 250, 0,0);

@@ -1,6 +1,6 @@
-export default class Student{
-    constructor(type, isUnlocked, previousType, nextType, undergradCost, mastersCost, phDCost){
-        this.type=type
+class Student{
+    constructor(kind, isUnlocked, previousType, nextType, undergradCost, mastersCost, phDCost){
+        this.kind=kind
         this.isUnlocked=isUnlocked
         this.previousType=previousType
         this.nextType=nextType
