@@ -26,4 +26,5 @@ class Admin{
     }
 }
 
-var Registrar = new Admin("Registrar", true, 0, null, "committeeMember", 250, 0,0);
+var Registrar = new Admin("Registrar", true, 0, null, CommitteeMember, 250, 0, 0);
+var CommitteeMember = new Admin("Committee Member", false, 0, Registrar, CommitteeChair, 1000, 0, 0);
