@@ -43,3 +43,24 @@
   border-left: none;
   height: 300px;
 }
+
+#achievementGrid{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2rem;
+}
+
+.achievement{
+    padding: .5rem;
+    background-color: white;
+    border-color: black;
+    border-width: .1rem;
+    border-style: solid;
+    margin: 1rem;
+}
+
+.achievement:hover{
+    box-shadow: 0 0 1.5rem .5rem gold;
+}

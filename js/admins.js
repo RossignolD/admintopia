@@ -10,21 +10,26 @@ class Admin{
         this.mastersCost=mastersCost
         this.phDCost=phDCost
     }
-    
-    
-    unlockNextAdmin(undergrads, masters, PhDs){
-        if (undergrads>=this.undergradCost(this.nextTitle()) && masters>=this.mastersCost(this.nextTitle) && PhDs>=this.phDCost(this.nextTitle)){
-            this.nextTitle.isUnlocked=true;
-        }
-        else{
-            this.nextTitle.isUnlocked=false;
-        }
-    }
 
     howManyAdmins(){
         return this.numberOf()
     }
+
+    unlockNextAdmin(title){
+        if(title.undergradCost<Undergrad.numberOf && title.mastersCost<Masters.numberOf && title.phDCost<PhDStudent.numberOf){
+            this.nextTitle.isUnlocked=true
+        }
+    }
 }
 
-var Registrar = new Admin("Registrar", true, 0, null, CommitteeMember, 250, 0, 0);
+var Registrar = new Admin("Registrar", false, 0, null, CommitteeMember, 100, 0, 0);
 var CommitteeMember = new Admin("Committee Member", false, 0, Registrar, CommitteeChair, 1000, 0, 0);
+var CommitteeChair = new Admin("Committee Chair", false, 0, CommitteeMember, AssistantDean, 5000, 0, 0)
+var AssistantDean = new Admin("Assistant Dean", false, 0, CommitteeChair, DeanOfCollege, 15000, 0, 0)
+var DeanOfCollege = new Admin("Dean of College", false, 0, AssistantDean, AssociateViceProvost, 25000, 0, 0)
+var AssociateViceProvost = new Admin("Associate Vice-Provost", false, 0, DeanOfCollege, ViceProvost, 30000, 10, 0)
+var ViceProvost = new Admin("Vice-Provost", false, 0, AssociateViceProvost, Provost, 35000, 25, 0)
+var Provost = new Admin("Provost", false, 0, ViceProvost, ProViceChancellor, 40000, 50, 10)
+var ProViceChancellor = new Admin("Pro-Vice-Chancellor", false, 0, Provost, ViceChancellor, 450000, 100, 25)
+var ViceChancellor = new Admin("Vice-Chancellor", false, 0, ProViceChancellor, Chancellor, 50000, 500, 100)
+var Chancellor = new Admin("Chancellor", false, 0, ViceChancellor, null, 60000, 1000, 250)
