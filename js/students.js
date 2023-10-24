@@ -29,3 +29,17 @@ class Student{
 var Undergrad = new Student("Undergrad", true, 0, null, Masters, 0, 0, 0)
 var Masters = new Student("Masters", false, 0, Undergrad, PhDStudent, 250, 0, 0)
 var PhDStudent = new Student("PhD", false, 0, Masters, null, 0, 250, 0,)
+
+function toggleStudentButton(title, buttonID){
+  title.unlockNextStudent();
+
+  if(title.isUnlocked==true){
+      document.getElementById(buttonID).removeAttribute("disabled");
+      return "done"
+  }
+  else(title.isUnlocked==false);
+  {
+      document.getElementById(buttonID).setAttribute("disabled", "");
+  return "not unlocked"
+  }
+}

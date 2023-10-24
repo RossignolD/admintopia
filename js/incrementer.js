@@ -43,3 +43,8 @@ function hireAdmin(myKind, kindID, buttonID) {
   }
 }
 
+window.setInterval(function(){
+	
+	addStudents(Undergrad, Registrar.numberOf);
+	showNumber("numberOfUndergrads", Undergrad);
+}, 1000)
