@@ -12,11 +12,11 @@ class Student{
 
     unlockNextStudent(undergrads, masters, PhDs){
         if (undergrads>=this.undergradCost.nextType && masters>=this.mastersCost.nextType && PhDs>=this.phDCost.nextType){
-            this.nextTitle.isUnlocked=true;
+            this.nextType.isUnlocked=true;
             return true
         }
         else{
-            this.nextTitle.isUnlocked=false;
+            this.nextType.isUnlocked=false;
             return false
         }
     }

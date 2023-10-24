@@ -40,7 +40,7 @@
     <h1>Undergraduate and Graduate Admissions</h1>
     <button
       id="undergrad"
-      onclick="addOneMoreAdmin(Undergrad); showNumber('numberOfUndergrads', Undergrad)"
+      onclick="addStudents(Undergrad, 1); checkAvailability(Registrar, 'registrar'); showNumber('numberOfUndergrads', Undergrad);"
     >
       Admit one Undergraduate student
     </button>
@@ -54,8 +54,7 @@
     <h1>Adminstrator Hiring</h1>
     <button
       id="registrar"
-      onclick="addOneMoreAdmin(Registrar); showNumber('numberOfRegistrars', Registrar)"
-      disabled="true"
+      onclick="hireAdmin(Registrar, 'numberOfRegistrars', 'registrar')"
     >
       Add 1 Registrar
     </button>

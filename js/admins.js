@@ -20,8 +20,12 @@ class Admin{
             this.isUnlocked=true
             return true
         }
-        else return false
+        
+        else {           
+             this.isUnlocked=false
+            return false
     }
+}
 }
 
 var Registrar = new Admin("Registrar", false, 0, null, CommitteeMember, 100, 0, 0);
@@ -36,15 +40,32 @@ var ProViceChancellor = new Admin("Pro-Vice-Chancellor", false, 0, Provost, Vice
 var ViceChancellor = new Admin("Vice-Chancellor", false, 0, ProViceChancellor, Chancellor, 50000, 500, 100)
 var Chancellor = new Admin("Chancellor", false, 0, ViceChancellor, null, 60000, 1000, 250)
 
-function enableAdminButton(title, buttonID){
+function toggleAdminButton(title, buttonID){
+    title.unlockAdmin();
+
     if(title.isUnlocked==true){
         document.getElementById(buttonID).removeAttribute("disabled");
         return "done"
     }
-    else return "not unlocked yet"
+    else(title.isUnlocked==false);
+    {
+        document.getElementById(buttonID).setAttribute("disabled", "");
+    return "not unlocked"
+    }
 }
+
+function checkAvailability(kind, buttonID){
+    if(kind.undergradCost < Undergrad.numberOf){
+        toggleAdminButton(kind, buttonID)
+        console.log("hello")
+    }
+    else{
+        toggleAdminButton(kind, buttonID)
+        console.log("goodbye")
+    }
+    }
 
 $(function() {
     document.getElementById("registrar").disabled="true";
-
+    document.getElementById("numberOfUndergrads").innerHTML=showNumber("numberOfUndergrads", Undergrad)
 });
