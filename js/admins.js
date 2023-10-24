@@ -15,10 +15,12 @@ class Admin{
         return this.numberOf()
     }
 
-    unlockNextAdmin(title){
-        if(title.undergradCost<Undergrad.numberOf && title.mastersCost<Masters.numberOf && title.phDCost<PhDStudent.numberOf){
-            this.nextTitle.isUnlocked=true
+    unlockAdmin(){
+        if(this.undergradCost<Undergrad.numberOf && this.mastersCost<=Masters.numberOf && this.phDCost<=PhDStudent.numberOf){
+            this.isUnlocked=true
+            return true
         }
+        else return false
     }
 }
 
@@ -33,3 +35,16 @@ var Provost = new Admin("Provost", false, 0, ViceProvost, ProViceChancellor, 400
 var ProViceChancellor = new Admin("Pro-Vice-Chancellor", false, 0, Provost, ViceChancellor, 450000, 100, 25)
 var ViceChancellor = new Admin("Vice-Chancellor", false, 0, ProViceChancellor, Chancellor, 50000, 500, 100)
 var Chancellor = new Admin("Chancellor", false, 0, ViceChancellor, null, 60000, 1000, 250)
+
+function enableAdminButton(title, buttonID){
+    if(title.isUnlocked==true){
+        document.getElementById(buttonID).removeAttribute("disabled");
+        return "done"
+    }
+    else return "not unlocked yet"
+}
+
+$(function() {
+    document.getElementById("registrar").disabled="true";
+
+});
