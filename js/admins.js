@@ -154,7 +154,6 @@ const toasts = new Toasts({
   offsetY: 20, // 20px
   gap: 20, // The gap size in pixels between toasts
   width: 300, // 300px
-  timing: "ease", // See list of available CSS transition timings
   duration: ".5s", // Transition duration
   dimOld: true, // Dim old notifications while the newest notification stays highlighted
   position: "top-right", // top-left | top-center | top-right | bottom-left | bottom-center | bottom-right
@@ -173,21 +172,18 @@ function toggleAdminButton(title, buttonID) {
   }
 }
 
-function checkAvailability(kind, buttonID) {
+function checkAvailabilityAdmins(kind, buttonID) {
   if (kind.undergradCost < Undergrad.numberOf) {
     toggleAdminButton(kind, buttonID);
-    console.log("hello");
-  } else if ((kind.undergradCost = Undergrad.numberOf)) {
+  } else if (kind.undergradCost == Undergrad.numberOf) {
     toggleAdminButton(kind, buttonID);
-    console.log("hello");
     toasts.push({
       title: "Success Toast",
       content: "My notification description.",
-      style: "success",
+      dismissAfter: "3s"
     });
   } else {
     toggleAdminButton(kind, buttonID);
-    console.log("goodbye");
   }
 }
 

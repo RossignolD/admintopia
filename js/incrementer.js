@@ -43,8 +43,29 @@ function hireAdmin(myKind, kindID, buttonID) {
   }
 }
 
+function admitGradStudent(myKind, kindID, buttonID) {
+  if (myKind.undergradCost > Undergrad.numberOf) {
+    toggleStudentButton(myKind, buttonID);
+  } else {
+    addStudents(myKind, 1);
+    removeStudents(Undergrad, myKind.undergradCost, "numberOfUndergrads");
+    // removeStudents(Masters, myKind.mastersCost, "numberOfMasters");
+    // removeStudents(PhDStudent, myKind.phDCost, "numberOfPhDs");
+    showNumber(kindID, myKind);
+    showNumber("numberOfUndergrads", Undergrad);
+    if (myKind.undergradCost > Undergrad.numberOf) {
+      toggleStudentButton(myKind, buttonID);
+    }
+    return console.log(myKind.numberOf);
+  }
+  toggleStudentButton(myKind, buttonID)
+}
+
 window.setInterval(function(){
 	
 	addStudents(Undergrad, Registrar.numberOf);
 	showNumber("numberOfUndergrads", Undergrad);
+	showNumber("numberOfMasters", Masters);
+  showNumber("numberOfPhDStudents", PhDStudent);
+  
 }, 1000)
