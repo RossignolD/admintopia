@@ -49,8 +49,7 @@ function admitGradStudent(myKind, kindID, buttonID) {
   } else {
     addStudents(myKind, 1);
     removeStudents(Undergrad, myKind.undergradCost, "numberOfUndergrads");
-    // removeStudents(Masters, myKind.mastersCost, "numberOfMasters");
-    // removeStudents(PhDStudent, myKind.phDCost, "numberOfPhDs");
+    removeStudents(Masters, myKind.mastersCost, "numberOfMasters");
     showNumber(kindID, myKind);
     showNumber("numberOfUndergrads", Undergrad);
     if (myKind.undergradCost > Undergrad.numberOf) {
