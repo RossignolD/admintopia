@@ -43,21 +43,15 @@ function hireAdmin(myKind, kindID, buttonID) {
   }
 }
 
-function admitGradStudent(myKind, kindID, buttonID) {
+function admitGradStudent(myKind, buttonID) {
   if (myKind.undergradCost > Undergrad.numberOf || myKind.mastersCost > Masters.numberOf) {
     toggleStudentButton(myKind, buttonID);
   } else {
     addStudents(myKind, 1);
     removeStudents(Undergrad, myKind.undergradCost, "numberOfUndergrads");
     removeStudents(Masters, myKind.mastersCost, "numberOfMasters");
-    showNumber(kindID, myKind);
-    showNumber("numberOfUndergrads", Undergrad);
-    showNumber("numberOfMasters", Masters);
-
-    for (const instance of Student.instances){
-      showNumber(instance.counterID, instance);
-      toggleStudentButton(instance, instance.buttonID);
-    }
+    Student.instances.forEach(el => {showNumber(el.counterID, el)
+    });
     toggleStudentButton(myKind, buttonID)
     return console.log(myKind.numberOf);
   }
