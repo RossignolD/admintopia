@@ -43,17 +43,17 @@
     <h1>Undergraduate and Graduate Admissions</h1>
     <button
       id="undergrad"
-      onclick="addStudents(Undergrad, 1); checkAvailabilityAdmins(Registrar, 'registrar'); checkAvailabilityMasters(); showNumber('numberOfUndergrads', Undergrad);"
+      onclick="addStudents(Undergrad, 1); checkAvailabilityAdmins(Registrar, 'registrar'); checkAvailabilityMasters(); showNumber(Undergrad.counterID, Undergrad);"
     >
       Admit one Undergraduate student
     </button>
     <div>You have</div>
     <div id="numberOfUndergrads"></div>
     <div>Undergraduates</div>
-<hr>
+    <hr />
     <button
       id="masters"
-      onclick="admitGradStudent(Masters, 'masters'); checkAvailabilityPhD(); showNumber('numberOfMasters', Masters);"
+      onclick="admitGradStudent(Masters, Masters.buttonID); checkAvailabilityPhD(); showNumber(Masters.counterID, Masters);"
     >
       Admit one Masters student
     </button>
@@ -61,10 +61,10 @@
     <div id="numberOfMasters"></div>
     <div>Masters students</div>
 
-    <hr>
+    <hr />
     <button
       id="phD"
-      onclick="admitGradStudent(PhDStudent, 'phD'); checkAvailabilityPhD();  showNumber('numberOfPhDStudents', PhDStudent); checkAvailabilityMasters();  showNumber('numberOfMasters', Masters);"
+      onclick="admitGradStudent(PhDStudent, PhDStudent.buttonID); checkAvailabilityPhD();  showNumber(PhDStudent.counterID, PhDStudent); checkAvailabilityMasters();  showNumber(Masters.counterID, Masters);"
     >
       Admit one Ph.D. student
     </button>
@@ -72,9 +72,6 @@
     <div id="numberOfPhDStudents"></div>
     <div>Ph.D. students</div>
   </div>
-  </div>
-
-
 
   <div id="hireAdmins" class="tabcontent">
     <h1>Adminstrator Hiring</h1>

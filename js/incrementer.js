@@ -26,36 +26,37 @@ function removeStudents(kind, numberToBeRemoved, id) {
   }
 }
 
-function hireAdmin(myKind, kindID, buttonID) {
+function hireAdmin(myKind) {
   if (myKind.undergradCost > Undergrad.numberOf) {
-    toggleAdminButton(myKind, buttonID);
+    toggleAdminButton(myKind, myKind.buttonID);
   } else {
     addAdmins(myKind, 1);
+
     removeStudents(Undergrad, myKind.undergradCost, "numberOfUndergrads");
     // removeStudents(Masters, myKind.mastersCost, "numberOfMasters");
     // removeStudents(PhDStudent, myKind.phDCost, "numberOfPhDs");
-    showNumber(kindID, myKind);
-    showNumber("numberOfUndergrads", Undergrad);
+    showNumber(myKind.counterID, myKind);
+    showNumber(Undergrad.counterID, Undergrad);
     if (myKind.undergradCost > Undergrad.numberOf) {
-      toggleAdminButton(myKind, buttonID);
+      toggleAdminButton(myKind, myKind.buttonID);
     }
     return console.log(myKind.numberOf);
   }
 }
 
-function admitGradStudent(myKind, buttonID) {
+function admitGradStudent(myKind) {
   if (myKind.undergradCost > Undergrad.numberOf || myKind.mastersCost > Masters.numberOf) {
-    toggleStudentButton(myKind, buttonID);
+    toggleStudentButton(myKind, myKind.buttonID);
   } else {
     addStudents(myKind, 1);
     removeStudents(Undergrad, myKind.undergradCost, "numberOfUndergrads");
     removeStudents(Masters, myKind.mastersCost, "numberOfMasters");
     Student.instances.forEach(el => {showNumber(el.counterID, el)
     });
-    toggleStudentButton(myKind, buttonID)
+    toggleStudentButton(myKind, myKind.buttonID)
     return console.log(myKind.numberOf);
   }
-  toggleStudentButton(myKind, buttonID)
+  toggleStudentButton(myKind, myKind.buttonID)
 }
 
 window.setInterval(function(){
@@ -67,4 +68,5 @@ window.setInterval(function(){
 
   checkAvailabilityMasters();
   checkAvailabilityPhD();
+  checkAvailabilityAdmins(Registrar);
 }, 1000)

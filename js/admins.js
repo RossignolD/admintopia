@@ -7,7 +7,9 @@ class Admin {
     nextTitle,
     undergradCost,
     mastersCost,
-    phDCost
+    phDCost,
+    buttonID,
+    counterID
   ) {
     this.title = title;
     this.isUnlocked = isUnlocked;
@@ -17,6 +19,8 @@ class Admin {
     this.undergradCost = undergradCost;
     this.mastersCost = mastersCost;
     this.phDCost = phDCost;
+    this.buttonID = buttonID;
+    this.counterID = counterID;
   }
 
   howManyAdmins() {
@@ -46,7 +50,9 @@ var Registrar = new Admin(
   CommitteeMember,
   100,
   0,
-  0
+  0,
+  "registrar",
+  "numberOfRegistrars"
 );
 var CommitteeMember = new Admin(
   "Committee Member",
@@ -56,7 +62,9 @@ var CommitteeMember = new Admin(
   CommitteeChair,
   1000,
   0,
-  0
+  0,
+  "committeemember",
+  "numberOfCommitteeMembers"
 );
 var CommitteeChair = new Admin(
   "Committee Chair",
@@ -66,7 +74,9 @@ var CommitteeChair = new Admin(
   AssistantDean,
   5000,
   0,
-  0
+  0,
+  "committeechair",
+  "numberOfCommitteeChairs"
 );
 var AssistantDean = new Admin(
   "Assistant Dean",
@@ -76,7 +86,9 @@ var AssistantDean = new Admin(
   DeanOfCollege,
   15000,
   0,
-  0
+  0,
+  "assistantdean",
+  "numberOfAssistantDeans"
 );
 var DeanOfCollege = new Admin(
   "Dean of College",
@@ -86,7 +98,9 @@ var DeanOfCollege = new Admin(
   AssociateViceProvost,
   25000,
   0,
-  0
+  0,
+  "deanofcollege",
+  "numberOfDeans"
 );
 var AssociateViceProvost = new Admin(
   "Associate Vice-Provost",
@@ -96,7 +110,9 @@ var AssociateViceProvost = new Admin(
   ViceProvost,
   30000,
   10,
-  0
+  0,
+  "associateviceprovost",
+  "numberOfAVP"
 );
 var ViceProvost = new Admin(
   "Vice-Provost",
@@ -106,7 +122,9 @@ var ViceProvost = new Admin(
   Provost,
   35000,
   25,
-  0
+  0,
+  "viceprovost",
+  "numberOfViceProvosts"
 );
 var Provost = new Admin(
   "Provost",
@@ -116,7 +134,9 @@ var Provost = new Admin(
   ProViceChancellor,
   40000,
   50,
-  10
+  10,
+  "provost",
+  "numberOfProvosts"
 );
 var ProViceChancellor = new Admin(
   "Pro-Vice-Chancellor",
@@ -126,7 +146,9 @@ var ProViceChancellor = new Admin(
   ViceChancellor,
   450000,
   100,
-  25
+  25,
+  "provicechancellor",
+  "numberOfPVC"
 );
 var ViceChancellor = new Admin(
   "Vice-Chancellor",
@@ -136,7 +158,9 @@ var ViceChancellor = new Admin(
   Chancellor,
   50000,
   500,
-  100
+  100,
+  "vicechancellor",
+  "numberOfVC"
 );
 var Chancellor = new Admin(
   "Chancellor",
@@ -146,7 +170,9 @@ var Chancellor = new Admin(
   null,
   60000,
   1000,
-  250
+  250,
+  "chancellor",
+  "numberOfChancellors"
 );
 
 const toasts = new Toasts({
@@ -159,39 +185,41 @@ const toasts = new Toasts({
   position: "top-right", // top-left | top-center | top-right | bottom-left | bottom-center | bottom-right
 });
 
-function toggleAdminButton(title, buttonID) {
+function toggleAdminButton(title) {
   title.unlockAdmin();
 
   if (title.isUnlocked == true) {
-    document.getElementById(buttonID).removeAttribute("disabled");
+    document.getElementById(title.buttonID).removeAttribute("disabled");
     return "done";
   } else title.isUnlocked == false;
   {
-    document.getElementById(buttonID).setAttribute("disabled", "");
+    document.getElementById(title.buttonID).setAttribute("disabled", "");
     return "not unlocked";
   }
 }
 
-function checkAvailabilityAdmins(kind, buttonID) {
+function checkAvailabilityAdmins(kind) {
   if (kind.undergradCost < Undergrad.numberOf) {
-    toggleAdminButton(kind, buttonID);
+    toggleAdminButton(kind, kind.buttonID);
   } else if (kind.undergradCost == Undergrad.numberOf) {
-    toggleAdminButton(kind, buttonID);
+    toggleAdminButton(kind, kind.buttonID);
     toasts.push({
       title: "Human Resources Notification",
-      content: "One or more " + kind.title + " may be hired now.",
+      content: "One or more " + kind.title + "s" + " may be hired now.",
       dismissAfter: "3s",
-      width: 500
+      width: 500,
     });
   } else {
-    toggleAdminButton(kind, buttonID);
+    toggleAdminButton(kind, kind.buttonID);
   }
 }
 
 $(function () {
   document.getElementById("registrar").disabled = "true";
-  document.getElementById("numberOfUndergrads").innerHTML = showNumber(
-    "numberOfUndergrads",
-    Undergrad
-  );
+  Student.instances.forEach((el) => {
+    document.getElementById(el.counterID).innerHTML = showNumber(
+      el.counterID,
+      el
+    );
+  });
 });
