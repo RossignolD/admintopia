@@ -43,7 +43,7 @@
     <h1>Undergraduate and Graduate Admissions</h1>
     <button
       id="undergrad"
-      onclick="addStudents(Undergrad, 1); checkAvailabilityAdmins(Registrar, 'registrar'); checkAvailabilityStudents(Masters, 'masters'); checkAvailabilityStudents(PhDStudent, 'phD'); showNumber('numberOfUndergrads', Undergrad);"
+      onclick="addStudents(Undergrad, 1); checkAvailabilityAdmins(Registrar, 'registrar'); checkAvailabilityMasters(); showNumber('numberOfUndergrads', Undergrad);"
     >
       Admit one Undergraduate student
     </button>
@@ -53,7 +53,7 @@
 <hr>
     <button
       id="masters"
-      onclick="checkAvailabilityAdmins(Registrar, 'registrar'); admitGradStudent(Masters, 'numberOfMasters', 'masters'); checkAvailabilityStudents(Masters, 'masters'); checkAvailabilityStudents(PhDStudent, 'phD');"
+      onclick="admitGradStudent(Masters, 'numberOfMasters', 'masters'); checkAvailabilityPhD(); showNumber('numberOfMasters', Masters);"
     >
       Admit one Masters student
     </button>
@@ -64,7 +64,7 @@
     <hr>
     <button
       id="phD"
-      onclick="checkAvailabilityAdmins(Registrar, 'registrar');  admitGradStudent(PhDStudent, 'numberOfPhDStudents', 'phD'); checkAvailabilityStudents(Masters, 'masters'); checkAvailabilityStudents(PhDStudent, 'phD')"
+      onclick="admitGradStudent(PhDStudent, 'numberOfPhDStudents', 'phD'); checkAvailabilityPhD();  showNumber('numberOfPhDStudents', PhDStudent); checkAvailabilityMasters();  showNumber('numberOfMasters', Masters);"
     >
       Admit one Ph.D. student
     </button>

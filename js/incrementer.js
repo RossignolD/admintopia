@@ -44,7 +44,7 @@ function hireAdmin(myKind, kindID, buttonID) {
 }
 
 function admitGradStudent(myKind, kindID, buttonID) {
-  if (myKind.undergradCost > Undergrad.numberOf) {
+  if (myKind.undergradCost > Undergrad.numberOf || myKind.mastersCost > Masters.numberOf) {
     toggleStudentButton(myKind, buttonID);
   } else {
     addStudents(myKind, 1);
@@ -52,9 +52,13 @@ function admitGradStudent(myKind, kindID, buttonID) {
     removeStudents(Masters, myKind.mastersCost, "numberOfMasters");
     showNumber(kindID, myKind);
     showNumber("numberOfUndergrads", Undergrad);
-    if (myKind.undergradCost > Undergrad.numberOf) {
-      toggleStudentButton(myKind, buttonID);
+    showNumber("numberOfMasters", Masters);
+
+    for (const instance of Student.instances){
+      showNumber(instance.counterID, instance);
+      toggleStudentButton(instance, instance.buttonID);
     }
+    toggleStudentButton(myKind, buttonID)
     return console.log(myKind.numberOf);
   }
   toggleStudentButton(myKind, buttonID)
@@ -66,5 +70,7 @@ window.setInterval(function(){
 	showNumber("numberOfUndergrads", Undergrad);
 	showNumber("numberOfMasters", Masters);
   showNumber("numberOfPhDStudents", PhDStudent);
-  
+
+  checkAvailabilityMasters();
+  checkAvailabilityPhD();
 }, 1000)

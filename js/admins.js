@@ -178,9 +178,10 @@ function checkAvailabilityAdmins(kind, buttonID) {
   } else if (kind.undergradCost == Undergrad.numberOf) {
     toggleAdminButton(kind, buttonID);
     toasts.push({
-      title: "Success Toast",
-      content: "My notification description.",
-      dismissAfter: "3s"
+      title: "Human Resources Notification",
+      content: "One or more " + kind.title + " may be hired now.",
+      dismissAfter: "3s",
+      width: 500
     });
   } else {
     toggleAdminButton(kind, buttonID);

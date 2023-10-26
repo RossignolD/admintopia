@@ -1,4 +1,5 @@
-class Student{
+class Student {
+  static instances = [];
   constructor(
     kind,
     isUnlocked,
@@ -7,7 +8,8 @@ class Student{
     nextType,
     undergradCost,
     mastersCost,
-    phDCost
+    buttonID,
+    counterID
   ) {
     this.kind = kind;
     this.isUnlocked = isUnlocked;
@@ -16,13 +18,14 @@ class Student{
     this.nextType = nextType;
     this.undergradCost = undergradCost;
     this.mastersCost = mastersCost;
-    this.phDCost = phDCost;
+    this.buttonID = buttonID;
+    this.counterID = counterID;
+    Student.instances.push(this);
   }
-  unlockStudent(){
+  unlockStudent() {
     if (
       this.undergradCost < Undergrad.numberOf &&
-      this.mastersCost <= Masters.numberOf &&
-      this.phDCost <= PhDStudent.numberOf
+      this.mastersCost <= Masters.numberOf
     ) {
       this.isUnlocked = true;
       return true;
@@ -31,58 +34,91 @@ class Student{
       return false;
     }
   }
-
-
 }
 
+var Undergrad = new Student(
+  "Undergraduate",
+  true,
+  1,
+  null,
+  Masters,
+  0,
+  0,
+  "undergrad",
+  "numberOfUndergrads"
+);
+var Masters = new Student(
+  "Masters",
+  false,
+  0,
+  Undergrad,
+  PhDStudent,
+  10,
+  0,
+  "masters",
+  "numberOfMasters"
+);
+var PhDStudent = new Student(
+  "PhD",
+  false,
+  0,
+  Masters,
+  null,
+  0,
+  10,
+  "phD",
+  "numberOfPhDStudents"
+);
 
-var Undergrad = new Student("Undergrad", true, 0, null, Masters, 0, 0, 0);
-var Masters = new Student("Masters", false, 0, Undergrad, PhDStudent, 10, 0, 0);
-var PhDStudent = new Student("PhD", false, 0, Masters, null, 0, 10, 0);
-
-function toggleStudentButton(title, buttonID) {
+function toggleStudentButton(title) {
   title.unlockStudent();
 
   if (title.isUnlocked == true) {
-    document.getElementById(buttonID).removeAttribute("disabled");
+    document.getElementById(title.buttonID).removeAttribute("disabled");
     return "done";
-  } else
-  {
-    document.getElementById(buttonID).setAttribute("disabled", "");
+  } else {
+    document.getElementById(title.buttonID).setAttribute("disabled", "");
     return "not unlocked";
   }
 }
 
-function checkAvailabilityStudents(type, buttonID) {
-  if (type.undergradCost < Undergrad.numberOf) {
-    toggleStudentButton(type, buttonID);
-  } else if (type.undergradCost == Undergrad.number) {
-    toggleStudentButton(type, buttonID);
+function checkAvailabilityMasters() {
+  if (Masters.undergradCost == Undergrad.numberOf) {
+    toggleStudentButton(Masters, Masters.buttonID);
     toasts.push({
-      title: "Success Toast",
-      content: "My notification description.",
-      dismissAfter: "3s"
+      title: "Admissions Notification: Masters",
+      content: "One or more Masters students may be admitted now.",
+      dismissAfter: "3s",
+      width: 500,
     });
-    return console.log("success");
+    toggleStudentButton(PhDStudent, PhDStudent.buttonID);
   } else {
-    toggleStudentButton(type, buttonID);
+    toggleStudentButton(Masters, Masters.buttonID);
+  }
+}
+
+function checkAvailabilityPhD() {
+  if (PhDStudent.mastersCost == Masters.numberOf) {
+    toggleStudentButton(PhDStudent, PhDStudent.buttonID);
+    toasts.push({
+      title: "Admissions Notification: PhD",
+      content: "One or more PhD students may be admitted now.",
+      dismissAfter: "3s",
+      width: 500,
+    });
+    toggleStudentButton(PhDStudent, PhDStudent.buttonID);
+  } else {
+    toggleStudentButton(PhDStudent, PhDStudent.buttonID);
   }
 }
 
 $(function () {
   document.getElementById("masters").disabled = "true";
   document.getElementById("phD").disabled = "true";
-
-  document.getElementById("numberOfUndergrads").innerHTML = showNumber(
-    "numberOfUndergrads",
-    Undergrad
-  );
-  document.getElementById("numberOfMasters").innerHTML = showNumber(
-    "numberOfMasters",
-    Masters
-  );
-  document.getElementById("numberOfPhDStudents").innerHTML = showNumber(
-    "numberOfPhDStudents",
-    PhDStudent
-  );
+  Student.instances.forEach((el) => {
+    document.getElementById(el.counterID).innerHTML = showNumber(
+      el.counterID,
+      el
+    );
+  });
 });
