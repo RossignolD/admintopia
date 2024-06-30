@@ -74,41 +74,41 @@ function toggleStudentButton(title) {
   title.unlockStudent();
 
   if (title.isUnlocked == true) {
-    document.getElementById(title.buttonID).removeAttribute("disabled");
+    document.getElementById(title.buttonID).disabled = false;
     return "done";
   } else {
-    document.getElementById(title.buttonID).setAttribute("disabled", "");
+    document.getElementById(title.buttonID).disabled = true;
     return "not unlocked";
   }
 }
 
 function checkAvailabilityMasters() {
   if (Masters.undergradCost == Undergrad.numberOf) {
-    toggleStudentButton(Masters, Masters.buttonID);
+    toggleStudentButton(Masters);
     toasts.push({
       title: "Admissions Notification: Masters",
       content: "One or more Masters students may be admitted now.",
       dismissAfter: "3s",
       width: 500,
     });
-    toggleStudentButton(PhDStudent, PhDStudent.buttonID);
+    toggleStudentButton(PhDStudent);
   } else {
-    toggleStudentButton(Masters, Masters.buttonID);
+    toggleStudentButton(Masters);
   }
 }
 
 function checkAvailabilityPhD() {
   if (PhDStudent.mastersCost == Masters.numberOf) {
-    toggleStudentButton(PhDStudent, PhDStudent.buttonID);
+    toggleStudentButton(PhDStudent);
     toasts.push({
       title: "Admissions Notification: PhD",
       content: "One or more PhD students may be admitted now.",
       dismissAfter: "3s",
       width: 500,
     });
-    toggleStudentButton(PhDStudent, PhDStudent.buttonID);
+    toggleStudentButton(PhDStudent);
   } else {
-    toggleStudentButton(PhDStudent, PhDStudent.buttonID);
+    toggleStudentButton(PhDStudent);
   }
 }
 
@@ -117,7 +117,6 @@ $(function () {
   document.getElementById("phD").disabled = "true";
   Student.instances.forEach((el) => {
     document.getElementById(el.counterID).innerHTML = showNumber(
-      el.counterID,
       el
     );
   });

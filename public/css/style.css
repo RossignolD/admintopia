@@ -3,8 +3,8 @@
 /* Style the tab */
 .tab {
   float: left;
-  border: 1px solid #ccc;
-  background-color: #f1f1f1;
+  border: 1px solid skyblue;
+  background-color: aliceblue;
   width: 30%;
   height: 300px;
 }
@@ -27,12 +27,12 @@
 
 /* Change background color of buttons on hover */
 .tab button:hover {
-  background-color: #ddd;
+  background-color: skyblue;
 }
 
 /* Create an active/current "tab button" class */
 .tab button.active {
-  background-color: #ccc;
+  background-color:dodgerblue;
 }
 
 /* Style the tab content */

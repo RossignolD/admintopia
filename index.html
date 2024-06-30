@@ -11,10 +11,10 @@
     crossorigin="anonymous"
   ></script>
   <script src="js/toasts.js"></script>
-  <script src="js/admins.js"></script>
   <script src="js/students.js"></script>
   <script src="js/incrementer.js"></script>
   <script src="js/tabManager.js"></script>
+  <script src="js/admins.js"></script>
 </head>
 
 <body>
@@ -43,7 +43,7 @@
     <h1>Undergraduate and Graduate Admissions</h1>
     <button
       id="undergrad"
-      onclick="addStudents(Undergrad, 1); checkAvailabilityAdmins(Registrar, 'registrar'); checkAvailabilityMasters(); showNumber(Undergrad.counterID, Undergrad);"
+      onclick="addStudents(Undergrad, 1); checkAvailabilityAdmins(Registrar); checkAvailabilityAdmins(CommitteeMember);checkAvailabilityMasters(); showNumber(Undergrad);"
     >
       Admit one Undergraduate student
     </button>
@@ -53,7 +53,7 @@
     <hr />
     <button
       id="masters"
-      onclick="admitGradStudent(Masters, Masters.buttonID); checkAvailabilityPhD(); showNumber(Masters.counterID, Masters);"
+      onclick="admitGradStudent(Masters); checkAvailabilityPhD(); showNumber(Masters);"
     >
       Admit one Masters student
     </button>
@@ -64,7 +64,7 @@
     <hr />
     <button
       id="phD"
-      onclick="admitGradStudent(PhDStudent, PhDStudent.buttonID); checkAvailabilityPhD();  showNumber(PhDStudent.counterID, PhDStudent); checkAvailabilityMasters();  showNumber(Masters.counterID, Masters);"
+      onclick="admitGradStudent(PhDStudent); checkAvailabilityPhD();  showNumber(PhDStudent); checkAvailabilityMasters();  showNumber(Masters);"
     >
       Admit one Ph.D. student
     </button>
@@ -77,13 +77,24 @@
     <h1>Adminstrator Hiring</h1>
     <button
       id="registrar"
-      onclick="hireAdmin(Registrar, 'numberOfRegistrars', 'registrar')"
+      onclick="hireAdmin(Registrar); checkAvailabilityAdmins(Registrar); toggleAdminButton(Registrar);"
     >
       Add 1 Registrar
     </button>
     <div>You have</div>
     <div id="numberOfRegistrars"></div>
     <div>Registrars</div>
+
+    <button
+      id="committeeMember"
+      onclick="hireAdmin(CommitteeMember);"
+    >
+      Add 1 Committee Member
+    </button>
+    <div>You have</div>
+    <div id="numberOfCommitteeMembers"></div>
+    <div>Committee Members</div>
+
   </div>
 
   <div id="achievements" class="tabcontent">

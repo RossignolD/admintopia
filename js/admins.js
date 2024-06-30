@@ -185,41 +185,42 @@ const toasts = new Toasts({
   position: "top-right", // top-left | top-center | top-right | bottom-left | bottom-center | bottom-right
 });
 
-function toggleAdminButton(title) {
-  title.unlockAdmin();
+function toggleAdminButton(kind) {
+  kind.unlockAdmin();
+  if (kind.isUnlocked == true) {
+    document.getElementById(kind.buttonID).disabled = false;
 
-  if (title.isUnlocked == true) {
-    document.getElementById(title.buttonID).removeAttribute("disabled");
     return "done";
-  } else title.isUnlocked == false;
+  } else;
   {
-    document.getElementById(title.buttonID).setAttribute("disabled", "");
+    document.getElementById(kind.buttonID).disabled = true;
     return "not unlocked";
   }
 }
 
 function checkAvailabilityAdmins(kind) {
   if (kind.undergradCost < Undergrad.numberOf) {
-    toggleAdminButton(kind, kind.buttonID);
-  } else if (kind.undergradCost == Undergrad.numberOf) {
-    toggleAdminButton(kind, kind.buttonID);
+    toggleAdminButton(kind);
+  } else if (
+    kind.undergradCost == Undergrad.numberOf ||
+    Undergrad.numberOf > kind.undergradCost
+  ) {
+    kind.isUnlocked = true;
+    toggleAdminButton(kind);
     toasts.push({
       title: "Human Resources Notification",
       content: "One or more " + kind.title + "s" + " may be hired now.",
       dismissAfter: "3s",
       width: 500,
     });
-  } else {
-    toggleAdminButton(kind, kind.buttonID);
   }
 }
 
 $(function () {
   document.getElementById("registrar").disabled = "true";
+  document.getElementById("committeeMember").disabled = "true";
+
   Student.instances.forEach((el) => {
-    document.getElementById(el.counterID).innerHTML = showNumber(
-      el.counterID,
-      el
-    );
+    document.getElementById(el.counterID).innerHTML = showNumber(el);
   });
 });
